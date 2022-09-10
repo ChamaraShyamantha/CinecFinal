@@ -17,7 +17,9 @@ class GlobalVariables {
   static const Color greyBackgroundCOlor = Color(0xffebecee);
   static var selectedNavBarColor = Colors.cyan[800]!;
   static const unselectedNavBarColor = Colors.black87;
-  static const appbacrcolor = Color.fromARGB(124, 6, 133, 130);
+ // static const appbacrcolor = Color.fromARGB(124, 6, 133, 130);
+ static const appbacrcolor = Colors.teal;
+
 
   // STATIC IMAGES
   static const List<String> carouselImages = [
@@ -50,4 +52,10 @@ class GlobalVariables {
       'image': 'assets/images/fashion.jpeg',
     },
   ];
+
+  static const textFieldProperty = TextStyle(
+                        fontSize: 13.0,
+                        // fontFamily: 'Source Sans Pro',
+                        fontWeight: FontWeight.w500,
+                      );
 }
