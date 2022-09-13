@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:medic/assets/global_variables.dart';
 
+import '../../../common/widgets/customButton.dart';
+
+
+
 class VenderAuthenticationScreen extends StatefulWidget {
   static const String routeName = '/authentication-screen';
   const VenderAuthenticationScreen({Key? key}) : super(key: key);
@@ -11,6 +15,15 @@ class VenderAuthenticationScreen extends StatefulWidget {
 }
 
 class _AuthenticationScreenState extends State<VenderAuthenticationScreen> {
+  final _VenderSignUpFormKey = GlobalKey<FormState>();
+
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _ownerController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _contactNoController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,171 +40,162 @@ class _AuthenticationScreenState extends State<VenderAuthenticationScreen> {
               Center(
                 child: Container(
                   child: Image.asset('lib/assets/images/logo.png'),
-                  height: 130.0,
+                  height: 100.0,
                 ),
               ),
               Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(10),
-                child: const Text(
-                  'Vender Sign Up',
-                  style: TextStyle(
-                      color: Colors.teal,
-                      fontSize: 16.0,
-                      letterSpacing: 1.0,
-                      fontFamily: 'Source Sans Pro',
-                      fontWeight: FontWeight.w800),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                child: SizedBox(
-                  height: 40,
-                  child: TextField(
-                    // controller: nameController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'User Name',
-                      labelStyle: TextStyle(
-                        fontSize: 13.0,
-                        // fontFamily: 'Source Sans Pro',
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                child: SizedBox(
-                  height: 40,
-                  child: TextField(
-                    obscureText: true,
-                    //   controller: passwordController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Password',
-                      labelStyle: TextStyle(
-                        fontSize: 13.0,
-                        // fontFamily: 'Source Sans Pro',
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                child: SizedBox(
-                  height: 40,
-                  child: TextField(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Store Name',
-                      labelStyle: TextStyle(
-                        fontSize: 13.0,
-                        // fontFamily: 'Source Sans Pro',
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                child: SizedBox(
-                  height: 40,
-                  child: TextField(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Owner Name',
-                      labelStyle: TextStyle(
-                        fontSize: 13.0,
-                        // fontFamily: 'Source Sans Pro',
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                child: SizedBox(
-                  height: 40,
-                  child: TextField(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Email Address',
-                      labelStyle: TextStyle(
-                        fontSize: 13.0,
-                        // fontFamily: 'Source Sans Pro',
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                child: SizedBox(
-                  height: 40,
-                  child: TextField(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Address',
-                      labelStyle: TextStyle(
-                        fontSize: 13.0,
-                        // fontFamily: 'Source Sans Pro',
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                child: SizedBox(
-                  height: 40,
-                  child: TextField(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Contact Number',
-                      labelStyle: TextStyle(
-                        fontSize: 13.0,
-                        // fontFamily: 'Source Sans Pro',
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                  height: 50,
-                  padding: const EdgeInsets.all(5),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.teal, // background
-                      onPrimary: Colors.yellow, // foreground
-                    ),
-                    child: const Text(
-                      'Register',
-                      style: TextStyle(
-                        fontSize: 12.0,
-                        color: Color(0xffebecee),
-                        fontFamily: 'Source Sans Pro',
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.all(10),
+                  child: const Text(
+                    'Vender Sign Up',
+                    style: TextStyle(
+                        color: Colors.teal,
+                        fontSize: 16.0,
                         letterSpacing: 1.0,
-                        fontWeight: FontWeight.w900,
+                        fontFamily: 'Source Sans Pro',
+                        fontWeight: FontWeight.w900),
+                  ),
+                ),
+              Form(
+                key: _VenderSignUpFormKey,
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      child: SizedBox(
+                        height: 40,
+                        child: TextField(
+                          controller: _nameController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Store Name',
+                            labelStyle: TextStyle(
+                              fontSize: 13.0,
+                              // fontFamily: 'Source Sans Pro',
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                    onPressed: () {
-                      //  print(nameController.text);
-                      // print(passwordController.text);
-                    },
-                  )),
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      child: SizedBox(
+                        height: 40,
+                        child: TextField(
+                          controller: _emailController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Email Address',
+                            labelStyle: TextStyle(
+                              fontSize: 13.0,
+                              // fontFamily: 'Source Sans Pro',
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      child: SizedBox(
+                        height: 40,
+                        child: TextField(
+                          controller: _passwordController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Password',
+                            labelStyle: TextStyle(
+                              fontSize: 13.0,
+                              // fontFamily: 'Source Sans Pro',
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 10),
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      child: SizedBox(
+                        height: 40,
+                        child: TextField(
+                          controller: _ownerController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Owner Name',
+                            labelStyle: TextStyle(
+                              fontSize: 13.0,
+                              // fontFamily: 'Source Sans Pro',
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      child: SizedBox(
+                        height: 40,
+                        child: TextField(
+                          controller: _addressController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Address',
+                            labelStyle: TextStyle(
+                              fontSize: 13.0,
+                              // fontFamily: 'Source Sans Pro',
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      child: SizedBox(
+                        height: 40,
+                        child: TextField(
+                          controller: _contactNoController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Contact Number',
+                            labelStyle: TextStyle(
+                              fontSize: 13.0,
+                              // fontFamily: 'Source Sans Pro',
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                       const SizedBox(height: 10, ),
+                       
+                       CustomButton(
+                        
+                       text: 'Sign Up',
+                        onTap: () {
+                        if (_VenderSignUpFormKey.currentState!.validate()) {
+                           signUpUser();
+                       }
+                     },
+                      )
+                  ],
+                ),
+              ),
             ],
           ),
         ),
       ),
     );
   }
+
+  void signUpUser() {}
 }

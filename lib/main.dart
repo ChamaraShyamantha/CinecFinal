@@ -5,7 +5,6 @@ import 'package:medic/assets/features/authentication/screens/login.dart';
 import 'package:medic/assets/global_variables.dart';
 import 'package:medic/rout.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Medishare', 
+      title: 'Medishare',
       theme: ThemeData(
         scaffoldBackgroundColor: GlobalVariables.backgroundColor,
         colorScheme: const ColorScheme.light(
@@ -31,9 +30,9 @@ class MyApp extends StatelessWidget {
         ),
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
-     // home:CustomerAuthenticationScreen(), 
-   //home:VenderAuthenticationScreen(),
-   home: Login(),
-   );
+      home: CustomerAuthenticationScreen(),
+      //home: VenderAuthenticationScreen(),
+      //home: Login(),
+    );
   }
 }

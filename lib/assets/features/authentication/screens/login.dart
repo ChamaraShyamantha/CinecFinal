@@ -68,7 +68,8 @@ class _AuthenticationScreenState extends State<Login> {
               ),
               Container(
                 height: 50,
-                padding: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(10),
+                margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: Colors.teal, // background
@@ -105,6 +106,7 @@ class _AuthenticationScreenState extends State<Login> {
                   ),
                 ),
               ),
+             
               Row(
                 children: <Widget>[
                   const Text(
@@ -115,20 +117,17 @@ class _AuthenticationScreenState extends State<Login> {
                         fontFamily: 'Source Sans Pro',
                         fontWeight: FontWeight.w500),
                   ),
-                  TextButton(
-                    child: const Text(
-                      'Sign in',
-                      style: TextStyle(
-                          color: Colors.teal,
-                          fontSize: 14.0,
-                          letterSpacing: 1.0,
-                          fontFamily: 'Source Sans Pro',
-                          fontWeight: FontWeight.w800),
-                    ),
-                    onPressed: () {
-                      //signup screen
-                    },
-                  )
+                  PopupMenuButton(
+                    icon: Image.asset('lib/assets/images/sign-up.png', scale:0.1,),
+                      itemBuilder: (context) => [
+                            PopupMenuItem(
+                              child: Text('Customer'),
+                            ),
+                            PopupMenuItem(
+                              child: Text('Vender'),
+                            )
+                          ]),
+                  
                 ],
                 mainAxisAlignment: MainAxisAlignment.center,
               ),
