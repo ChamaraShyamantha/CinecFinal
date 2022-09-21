@@ -4,16 +4,15 @@ const mongoose = require("mongoose");
 //const adminRouter = require("./routes/admin");
 
 
-
 const RouterAuthentication = require("./routes/authentication");
+
 //const productRouter = require("./routes/product");
 //const userRouter = require("./routes/user");
 
 
 const PORT = process.env.PORT || 3000;
 const medic = express();
-const DB =
-  "mongodb+srv://chamara:asdf1234@cluster0.lvyozim.mongodb.net/?retryWrites=true&w=majority";
+const DB ="mongodb+srv://chamara:asdf12345@cluster0.lvyozim.mongodb.net/?retryWrites=true&w=majority";
 
 
 medic.use(express.json());
