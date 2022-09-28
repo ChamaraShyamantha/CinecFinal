@@ -12,7 +12,7 @@ const RouterAuthentication = require("./routes/authentication");
 
 const PORT = process.env.PORT || 3000;
 const medic = express();
-const DB ="mongodb+srv://chamara:asdf12345@cluster0.lvyozim.mongodb.net/?retryWrites=true&w=majority";
+const DB ="mongodb+srv://chamara:LgnKJi8r3bT4qyob@cluster0.lvyozim.mongodb.net/?retryWrites=true&w=majority";
 
 
 medic.use(express.json());

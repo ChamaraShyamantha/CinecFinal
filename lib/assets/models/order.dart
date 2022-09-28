@@ -1,6 +1,6 @@
-/*import 'dart:convert';
+import 'dart:convert';
 
-//import 'package:medic/models/product.dart';
+import 'package:medic/assets/models/product.dart';
 
 class Order {
   final String id;
@@ -57,4 +57,3 @@ class Order {
 
   factory Order.fromJson(String source) => Order.fromMap(json.decode(source));
 }
-*/

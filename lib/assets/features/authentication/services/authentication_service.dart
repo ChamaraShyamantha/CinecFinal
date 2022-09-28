@@ -1,10 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/widgets.dart';
+import 'package:medic/assets/features/home/screens/home_screen.dart';
 import 'package:medic/assets/global_variables.dart';
 import 'package:medic/assets/models/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:medic/assets/utils.dart';
 import 'package:medic/assets/error_handler.dart';
-
+import 'package:medic/assets/providers/user_provider.dart';
+//import 'package:medic/assets/common/widgets/bottom_bar.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthenticationService {
   // sign up user
@@ -20,12 +27,12 @@ class AuthenticationService {
       User user = User(
         id: '',
         name: name,
-        email: email,
         password: password,
-        address: address,
-        contactNo: contactNo,
-        token: '',
+        email: email,
+        address: '',
+        contactNo: '',
         type: '',
+        token: '',
         cart: [],
       );
 
@@ -53,7 +60,7 @@ class AuthenticationService {
   }
 
   // sign in user
-/*  void signInUser({
+  void signInUser({
     required BuildContext context,
     required String email,
     required String password,
@@ -76,19 +83,20 @@ class AuthenticationService {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           Provider.of<UserProvider>(context, listen: false).setUser(res.body);
           await prefs.setString('x-auth-token', jsonDecode(res.body)['token']);
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            BottomBar.routeName,
-            (route) => false,
-          );
+          // Navigator.pushNamedAndRemoveUntil(
+          //   context,
+          //  // BottomBar.routeName,
+          //  HomeScreen.routeName,
+          //   (route) => false,
+          // );
         },
       );
     } catch (e) {
       showSnackBar(context, e.toString());
     }
   }
-*/
- /* // get user data
+
+  // get user data
   void getUserData(
     BuildContext context,
   ) async {
@@ -125,5 +133,5 @@ class AuthenticationService {
     } catch (e) {
       showSnackBar(context, e.toString());
     }
-  }*/
+  }
 }

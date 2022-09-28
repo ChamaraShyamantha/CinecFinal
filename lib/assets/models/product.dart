@@ -1,6 +1,6 @@
-/*import 'dart:convert';
+import 'dart:convert';
 
-//import 'package:medic/models/rating.dart';
+import 'package:medic/assets/models/rating.dart';
 
 class Product {
   final String name;
@@ -59,4 +59,3 @@ class Product {
   factory Product.fromJson(String source) =>
       Product.fromMap(json.decode(source));
 }
-*/

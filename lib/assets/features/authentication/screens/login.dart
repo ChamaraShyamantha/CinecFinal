@@ -1,138 +1,170 @@
 import 'package:flutter/material.dart';
 import 'package:medic/assets/global_variables.dart';
+import 'package:medic/assets/features/authentication/services/authentication_service.dart';
+import '../../../common/widgets/customButton.dart';
 
-class Login extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
   static const String routeName = '/authentication-screen';
-  const Login({Key? key}) : super(key: key);
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _AuthenticationScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _AuthenticationScreenState extends State<Login> {
+State<LoginScreen> createState() => _LoginScreenState();
+
+class _LoginScreenState extends State<LoginScreen> {
+  final _loginFormKey = GlobalKey<FormState>();
+
+  final AuthenticationService authenticationService = AuthenticationService();
+
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _nameController.dispose();
+  }
+
+  void signInUser() {
+    authenticationService.signInUser(
+      context: context,
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: GlobalVariables.appbacrcolor,
-          title: Center(
-            child: const Text('MEDISHARE'),
-          ),
+      appBar: AppBar(
+        backgroundColor: GlobalVariables.appbacrcolor,
+        title: Center(
+          child: const Text('MEDISHARE'),
         ),
-        body: SafeArea(
-            child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Center(
-                child: Container(
-                  child: Image.asset('lib/assets/images/logo.png'),
-                  height: 130.0,
-                ),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(children: [
+            Center(
+              child: Container(
+                child: Image.asset('lib/assets/images/logo.png'),
+                height: 130.0,
               ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                child: SizedBox(
-                  height: 40,
-                  child: TextField(
-                    //  controller: nameController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'User Name',
-                      labelStyle: TextStyle(
-                        fontSize: 13.0,
-                        // fontFamily: 'Source Sans Pro',
-                        fontWeight: FontWeight.w500,
+            ),
+            Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(10),
+              child: const Text(
+                'Login',
+                style: TextStyle(
+                    color: Colors.teal,
+                    fontSize: 16.0,
+                    letterSpacing: 1.0,
+                    fontFamily: 'Source Sans Pro',
+                    fontWeight: FontWeight.w900),
+              ),
+            ),
+            Form(
+              key: _loginFormKey,
+              child: Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: SizedBox(
+                      height: 40,
+                      child: TextField(
+                        controller: _emailController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'User Name',
+                          labelStyle: TextStyle(
+                            fontSize: 13.0,
+                            // fontFamily: 'Source Sans Pro',
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                child: SizedBox(
-                  height: 40,
-                  child: TextField(
-                    obscureText: true,
-                    //   controller: passwordController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Password',
-                      labelStyle: TextStyle(
-                        fontSize: 13.0,
-                        // fontFamily: 'Source Sans Pro',
-                        fontWeight: FontWeight.w500,
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                    child: SizedBox(
+                      height: 40,
+                      child: TextField(
+                        obscureText: true,
+                        controller: _passwordController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Password',
+                          labelStyle: TextStyle(
+                            fontSize: 13.0,
+                            // fontFamily: 'Source Sans Pro',
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
-              Container(
-                height: 50,
-                padding: const EdgeInsets.all(10),
-                margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.teal, // background
-                    onPrimary: Colors.yellow, // foreground
+                  CustomButton(
+                    text: 'Login',
+                    onTap: () {
+                      if (_loginFormKey.currentState!.validate()) {
+                        signInUser();
+                      }
+                    },
                   ),
-                  child: const Text(
-                    'Login',
-                    style: TextStyle(
-                      fontSize: 12.0,
-                      color: Color(0xffebecee),
-                      fontFamily: 'Source Sans Pro',
-                      letterSpacing: 1.0,
-                      fontWeight: FontWeight.w900,
+                  Container(
+                    child: TextButton(
+                      onPressed: () {
+                        //forgot password screen
+                      },
+                      child: const Text(
+                        'Forgot Password ?',
+                        style: TextStyle(
+                            color: Colors.teal,
+                            fontSize: 15.0,
+                            fontFamily: 'Source Sans Pro',
+                            fontWeight: FontWeight.w800),
+                      ),
                     ),
                   ),
-                  onPressed: () {
-                    //   print(nameController.text);
-                    //  print(passwordController.text);
-                  },
-                ),
-              ),
-              Container(
-                child: TextButton(
-                  onPressed: () {
-                    //forgot password screen
-                  },
-                  child: const Text(
-                    'Forgot Password ?',
-                    style: TextStyle(
-                        color: Colors.teal,
-                        fontSize: 15.0,
-                        fontFamily: 'Source Sans Pro',
-                        fontWeight: FontWeight.w800),
+                  Row(
+                    children: <Widget>[
+                      const Text(
+                        'Do not have an account?',
+                        style: TextStyle(
+                            color: Colors.teal,
+                            fontSize: 14.0,
+                            fontFamily: 'Source Sans Pro',
+                            fontWeight: FontWeight.w500),
+                      ),
+                      PopupMenuButton(
+                          icon: Image.asset(
+                            'lib/assets/images/sign-up.png',
+                            scale: 0.1,
+                          ),
+                          itemBuilder: (context) => [
+                                PopupMenuItem(
+                                  child: Text('Customer'),
+                                ),
+                                PopupMenuItem(
+                                  child: Text('Vender'),
+                                )
+                              ]),
+                    ],
+                    mainAxisAlignment: MainAxisAlignment.center,
                   ),
-                ),
-              ),
-             
-              Row(
-                children: <Widget>[
-                  const Text(
-                    'Do not have an account?',
-                    style: TextStyle(
-                        color: Colors.teal,
-                        fontSize: 14.0,
-                        fontFamily: 'Source Sans Pro',
-                        fontWeight: FontWeight.w500),
-                  ),
-                  PopupMenuButton(
-                    icon: Image.asset('lib/assets/images/sign-up.png', scale:0.1,),
-                      itemBuilder: (context) => [
-                            PopupMenuItem(
-                              child: Text('Customer'),
-                            ),
-                            PopupMenuItem(
-                              child: Text('Vender'),
-                            )
-                          ]),
-                  
                 ],
-                mainAxisAlignment: MainAxisAlignment.center,
               ),
-            ],
-          ),
-        )));
+            ),
+          ]),
+        ),
+      ),
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medic/assets/features/authentication/services/authentication_service.dart';
 import 'package:medic/assets/global_variables.dart';
 
 import '../../../common/widgets/customButton.dart';
@@ -14,6 +15,8 @@ class CustomerAuthenticationScreen extends StatefulWidget {
 
 class _AuthenticationScreenState extends State<CustomerAuthenticationScreen> {
   final _CustomerSignUpFormKey = GlobalKey<FormState>();
+    final _CustomerSignInFormKey = GlobalKey<FormState>();
+  final AuthenticationService authenticationService = AuthenticationService();
 
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -21,6 +24,36 @@ class _AuthenticationScreenState extends State<CustomerAuthenticationScreen> {
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _contactNoController = TextEditingController();
 
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _nameController.dispose();
+  }
+
+  void userSignUp() {
+    authenticationService.userSignUp(
+      context: context,
+      email: _emailController.text,
+      password: _passwordController.text,
+      name: _nameController.text,
+      contactNo: _contactNoController.text,
+      address: _addressController.text,
+      
+
+    );
+  }
+
+  void signInUser() {
+    authenticationService.signInUser(
+      context: context,
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
+  }
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +77,7 @@ class _AuthenticationScreenState extends State<CustomerAuthenticationScreen> {
                 alignment: Alignment.center,
                 padding: const EdgeInsets.all(10),
                 child: const Text(
-                  'Vender Sign Up',
+                  'Customer Sign Up',
                   style: TextStyle(
                       color: Colors.teal,
                       fontSize: 16.0,
@@ -74,7 +107,7 @@ class _AuthenticationScreenState extends State<CustomerAuthenticationScreen> {
                             ),
                           ),
                         ),
-                      ),
+                      ), 
                     ),
                     const SizedBox(height: 10),
                     Container(
@@ -158,7 +191,7 @@ class _AuthenticationScreenState extends State<CustomerAuthenticationScreen> {
                       text: 'Sign Up',
                       onTap: () {
                         if (_CustomerSignUpFormKey.currentState!.validate()) {
-                          signUpUser();
+                          userSignUp();
                         }
                       },
                     )
@@ -172,5 +205,5 @@ class _AuthenticationScreenState extends State<CustomerAuthenticationScreen> {
     );
   }
 
-  void signUpUser() {}
+ // void signUpUser() {}
 }
