@@ -5,6 +5,8 @@ import 'package:medic/assets/features/order_details/screens/order_details.dart';
 import 'package:medic/assets/models/order.dart';
 import 'package:flutter/material.dart';
 
+import 'package:typed_data/typed_data.dart';
+
 class OrdersScreen extends StatefulWidget {
   const OrdersScreen({Key? key}) : super(key: key);
 

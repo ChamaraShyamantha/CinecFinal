@@ -9,7 +9,7 @@ import 'package:medic/rout.dart';
 import 'package:provider/provider.dart';
 import 'package:medic/assets/common/widgets/bottom_bar.dart';
 import 'package:medic/assets/admin/screens/admin_screen.dart';
-
+import 'package:typed_data/typed_data.dart';
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
